@@ -7,7 +7,8 @@ const names = require("./names.json");
 const levels = require("./levels.json");
 const positions = require("./positions.json");
 const EmployeeModel = require("../db/employee.model");
-
+// const fructModel = require("../db/fruct.model")
+// const fructe = require("./fructe.json");
 const mongoUrl = process.env.MONGO_URL;
 
 if (!mongoUrl) {
@@ -29,11 +30,24 @@ const populateEmployees = async () => {
   await EmployeeModel.create(...employees);
   console.log("Employees created");
 };
+// const populateFructe = async () => {
+//   await fructModel.deleteMany({});
+
+//   const items = fructe.map((name) => ({
+//     name
+   
+//   }));
+
+//   await fructModel.create(...items);
+//   console.log("Fructe created");
+// };
 
 const main = async () => {
   await mongoose.connect(mongoUrl);
 
   await populateEmployees();
+
+  // await populateFructe();
 
   await mongoose.disconnect();
 };

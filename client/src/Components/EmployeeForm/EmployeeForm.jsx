@@ -8,6 +8,7 @@ const EmployeeForm = ({ onSave, disabled, employee, onCancel }) => {
       const [k, v] = entry;
       acc[k] = v;
       return acc;
+     
     }, {});
 
     return onSave(employee);
