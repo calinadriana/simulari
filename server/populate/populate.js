@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const names = require("./names.json");
 const levels = require("./levels.json");
 const positions = require("./positions.json");
+const colors = require("./colors.json")
 const EmployeeModel = require("../db/employee.model");
 // const fructModel = require("../db/fruct.model")
 // const fructe = require("./fructe.json");
@@ -25,6 +26,9 @@ const populateEmployees = async () => {
     name,
     level: pick(levels),
     position: pick(positions),
+    // colors: {
+    //   name:pick(colors)
+    // }
   }));
 
   await EmployeeModel.create(...employees);
