@@ -36,8 +36,10 @@ app.use("/api/employees/:id", async (req, res, next) => {
 });
 
 app.get("/api/employees/", async (req, res) => {
+  const colors = await colorModel.find({}).lean()
+  console.log(colors);
   const employees = await EmployeeModel.find().sort({ created: "desc" });
-  return res.json(employees);
+  return res.json(employees.map(e=>({...e,colors:colors.find(c=>c._id===e.colors)?.name})));
 });
 
 app.get("/api/employees/:id", (req, res) => {

@@ -6,8 +6,9 @@ const mongoose = require("mongoose");
 const names = require("./names.json");
 const levels = require("./levels.json");
 const positions = require("./positions.json");
-const colors = require("./colors.json")
+//const colors = require("./colors.json")
 const EmployeeModel = require("../db/employee.model");
+const colorModel = require("../db/colorModel.model")
 // const fructModel = require("../db/fruct.model")
 // const fructe = require("./fructe.json");
 const mongoUrl = process.env.MONGO_URL;
@@ -21,14 +22,13 @@ const pick = (from) => from[Math.floor(Math.random() * (from.length - 0))];
 
 const populateEmployees = async () => {
   await EmployeeModel.deleteMany({});
-
+  const colors = (await colorModel.find({}).lean())
+  console.log(colors);
   const employees = names.map((name) => ({
     name,
     level: pick(levels),
     position: pick(positions),
-    // colors: {
-    //   name:pick(colors)
-    // }
+    colors: pick(colors.map((c) => c._id)),
   }));
 
   await EmployeeModel.create(...employees);
