@@ -1,12 +1,10 @@
 // // https://mongoosejs.com/
 const mongoose = require("mongoose");
 
-const { Schema } = mongoose;
+const { Schema, model } = mongoose;
 
 const ColorSchema = new Schema({
-  name: String,
-
-  
+    name: String,
 });
 
-module.exports = mongoose.model("colorModel", ColorSchema);
+module.exports = model("colorModel", ColorSchema);
